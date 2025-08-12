@@ -9,6 +9,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/Components/ui/accordion";
+import { Badge } from "@/Components/ui/badge";
+import { ExternalLink } from "lucide-react";
 
 //types
 type area = {
@@ -56,7 +58,7 @@ export function Courses() {
           <TabsList className="bg-[var(--color-primary-light)]">
             {data.areas?.map((area: area) => (
               <TabsTrigger
-                className="text-[var(--color-text)] data-[state=active]:bg-green-700 data-[state=active]:text-white"
+                className="text-xl text-[var(--color-text)] data-[state=active]:bg-green-700 data-[state=active]:text-white"
                 key={area.name}
                 value={area.name}
               >
@@ -70,16 +72,25 @@ export function Courses() {
               {area?.ies?.map((ies: ies) => (
                 <Accordion type="single" collapsible>
                   <AccordionItem value={ies.name}>
-                    <AccordionTrigger>{ies.name}</AccordionTrigger>
-                <div className="flex gap-2">
-                    {ies?.courses?.map((course: courses) => (
-                      <AccordionContent key={course.id}>
-                        <div className="p-4 border rounded">
-                          <h3>{course.name}</h3>
-                          <span>oi</span>
-                        </div>
-                      </AccordionContent>
-                    ))}
+                    <AccordionTrigger className="text-xl px-2">{ies.name}</AccordionTrigger>
+                    <div className="flex gap-2 flex-wrap items-center justify-center">
+                      {ies?.courses?.map((course: courses) => (
+                        <AccordionContent key={course.id}>
+                          <div className="p-4 border rounded px-2">
+                            <h3 className="text-center">{course.name}</h3>
+                            <Badge variant="default" className="text-center">
+                              Duração de {course.duration}
+                            </Badge>
+                            <a
+                              target="_blank"
+                              href={course.link.toString()}
+                              className="flex items-center gap-2 mt-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 rounded"
+                            >
+                              <ExternalLink /> Acessar
+                            </a>
+                          </div>
+                        </AccordionContent>
+                      ))}
                     </div>
                   </AccordionItem>
                 </Accordion>
