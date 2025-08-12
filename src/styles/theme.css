@@ -1,0 +1,40 @@
+:root {
+  /* Cores principais */
+  --color-primary: #22c55e;       /* verde vibrante */
+  --color-primary-light: #4ade80; /* verde claro */
+  --color-primary-dark: #15803d;  /* verde escuro */
+
+  /* Cores de fundo e superfície */
+  --color-background: #ffffff;
+  --color-surface: #f0fdf4;
+
+  /* Texto */
+  --color-text: #064e3b;
+  --color-text-secondary: #166534;
+
+  /* Bordas */
+  --color-border: #d1fae5;
+
+  /* Estado */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-error: #dc2626;
+}
+
+[data-theme="dark"] {
+  --color-primary: #4ade80;
+  --color-primary-light: #86efac;
+  --color-primary-dark: #15803d;
+
+  --color-background: #052e16;
+  --color-surface: #064e3b;
+
+  --color-text: #d1fae5;
+  --color-text-secondary: #86efac;
+
+  --color-border: #134e4a;
+
+  --color-success: #22c55e;
+  --color-warning: #facc15;
+  --color-error: #ef4444;
+}
