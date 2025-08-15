@@ -6,6 +6,7 @@ type MaintemplateProps = {
 export function Maintemplate({children}:MaintemplateProps){
     return (
         <>
+        
         <Navbar/>
         {children}
         </>

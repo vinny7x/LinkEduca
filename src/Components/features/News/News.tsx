@@ -20,7 +20,7 @@ export function News() {
   });
   return (
     <section>
-      <Title>Notícias</Title>
+      <Title>Destaques</Title>
       {isLoading && (
         <div className="flex items-center justify-center mt-4">
           <PuffLoader color="#22c55e" />

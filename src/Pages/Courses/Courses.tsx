@@ -1,16 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { Title } from "@/Components/Title/Title";
 import { Maintemplate } from "@/Templates/Maintemplate";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/ui/tabs";
 import { PuffLoader } from "react-spinners";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/Components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/Components/ui/accordion";
 import { Badge } from "@/Components/ui/badge";
 import { ExternalLink } from "lucide-react";
+
+import { Tabs } from "antd";
 
 //types
 type area = {
@@ -31,14 +27,11 @@ type ies = {
 
 export function Courses() {
   const { data, isLoading } = useQuery({
-    queryKey: ["courses"], // identificador da query
+    queryKey: ["courses"],
     queryFn: () =>
-      fetch("https://www.jsonkeeper.com/b/UEDHD.json").then((res) =>
-        res.json()
-      ), //refatorar depois
+      fetch("https://www.jsonkeeper.com/b/UEDHD.json").then((res) => res.json()),
   });
-  //    if (isLoading) return <div>Carregando...</div>
-  //   if (error) return <div>Deu ruim: {error.message}</div>
+
   return (
     <Maintemplate>
       <Title subtitle="Selecione uma área que lhe interessa para ver os cursos disponíveis">
@@ -50,64 +43,63 @@ export function Courses() {
           <PuffLoader color="#22c55e" />
         </div>
       )}
+
       {data && (
+        <div className="items-center flex justify border p-2 m-2 rounded bg-[var(--color-surface)]">
         <Tabs
-          defaultValue="Tecnologia"
-          className="flex flex-col items-center w-full max-w-[600px] mx-auto mt-10"
-        >
-          <TabsList className="bg-[var(--color-primary-light)]">
-            {data.areas?.map((area: area) => (
-              <TabsTrigger
-                className="text-xl text-[var(--color-text)] data-[state=active]:bg-green-700 data-[state=active]:text-white"
-                key={area.name}
-                value={area.name}
-              >
+          defaultActiveKey="Tecnologia"
+          tabPosition="left"
+          className="flex justify- flex-wrap items-center w-full  mx-auto mt-10 text-left"
+          items={data.areas?.map((area: area) => ({
+            key: area.name,
+            // usando suas classes de cor e fonte
+            label: (
+              <span className="text-xl text-left text-[var(--color-text)]">
                 {area.name}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-
-          {data.areas?.map((area: area) => (
-            <TabsContent key={area.name} value={area.name}>
-              {area?.ies?.map((ies: ies) => (
-                <Accordion type="single" collapsible>
-                  <AccordionItem value={ies.name}>
-                    <AccordionTrigger className="text-xl px-2">{ies.name}</AccordionTrigger>
-                    <div className="flex gap-2 flex-wrap items-center justify-center">
-                      {ies?.courses?.map((course: courses) => (
-                        <AccordionContent key={course.id}>
-                          <div className="p-4 border rounded px-2">
-                            <h3 className="text-center">{course.name}</h3>
-                            <Badge variant="default" className="text-center">
-                              Duração de {course.duration}
-                            </Badge>
-                            <a
-                              target="_blank"
-                              href={course.link.toString()}
-                              className="flex items-center gap-2 mt-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 rounded"
-                            >
-                              <ExternalLink /> Acessar
-                            </a>
-                          </div>
-                        </AccordionContent>
-                      ))}
-                    </div>
-                  </AccordionItem>
-                </Accordion>
-              ))}
-            </TabsContent>
-          ))}
-        </Tabs>
+              </span>
+            ),
+            children: (
+              <div>
+                <hr/>
+                <p className="text-white">Selecione uma instituição de ensino para ver os cursos disponíveis</p>
+                {area.ies?.map((ies: ies) => (
+                  <Accordion className="w-auto" key={ies.name} type="single" collapsible>
+                    <AccordionItem value={ies.name}>
+                      
+                      <AccordionTrigger className="text-xl text-[var(--color-text-secondary)]">
+                        {ies.name}
+                      </AccordionTrigger>
+                      <div className="flex gap-2 flex-wrap items-center justify-center">
+                        {ies.courses?.map((course: courses) => (
+                          <AccordionContent key={course.id}>
+                            <div className="p-4 border rounded px-2">
+                              <h3 className="text-center text-[var(--color-text)]">{course.name}</h3>
+                              <span className="items-center flex justify-center">
+                                <Badge variant="default" className="text-center bg-[var(--color-surface)]">
+                                Duração de {course.duration}
+                              </Badge>
+                              </span>
+                              
+                              <a
+                                target="_blank"
+                                href={course.link.toString()}
+                                className="flex items-center gap-2 mt-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 rounded"
+                              >
+                                <ExternalLink /> Acessar
+                              </a>
+                            </div>
+                          </AccordionContent>
+                        ))}
+                      </div>
+                    </AccordionItem>
+                  </Accordion>
+                ))}
+              </div>
+            ),
+          }))}
+        />
+        </div>
       )}
-
-      {/* <Tabs defaultValue="account" className="w-[400px]">
-  <TabsList>
-    <TabsTrigger value="account">Account</TabsTrigger>
-    <TabsTrigger value="password">Password</TabsTrigger>
-  </TabsList>
-  <TabsContent value="account">Make changes to your account here.</TabsContent>
-  <TabsContent value="password">Change your password here.</TabsContent>
-</Tabs> */}
     </Maintemplate>
   );
 }

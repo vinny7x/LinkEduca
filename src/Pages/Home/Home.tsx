@@ -6,6 +6,7 @@ import { Maintemplate } from "../../Templates/Maintemplate";
 export function Home() {
   
   return (
+    
     <Maintemplate>
       <Title subtitle="Nossa missão é democratizar o acesso a educação">
         Link Educa
