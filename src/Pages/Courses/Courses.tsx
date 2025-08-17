@@ -2,34 +2,42 @@ import { useQuery } from "@tanstack/react-query";
 import { Title } from "@/Components/Title/Title";
 import { Maintemplate } from "@/Templates/Maintemplate";
 import { PuffLoader } from "react-spinners";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/Components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/Components/ui/accordion";
 import { Badge } from "@/Components/ui/badge";
-import { ExternalLink } from "lucide-react";
-
+import { ClockIcon, ExternalLink } from "lucide-react";
 import { Tabs } from "antd";
 
-//types
-type area = {
-  name: string;
-  ies: ies[];
-};
-type courses = {
+// types
+type Course = {
   id: string;
   name: string;
-  link: URL;
+  link: string;
   duration: string;
   dificuldade: string;
 };
-type ies = {
+
+type Institution = {
   name: string;
-  courses: courses[];
+  courses: Course[];
+};
+
+type Area = {
+  name: string;
+  ies: Institution[];
 };
 
 export function Courses() {
   const { data, isLoading } = useQuery({
     queryKey: ["courses"],
     queryFn: () =>
-      fetch("https://www.jsonkeeper.com/b/UEDHD.json").then((res) => res.json()),
+      fetch("https://www.jsonkeeper.com/b/UEDHD.json").then((res) =>
+        res.json()
+      ),
   });
 
   return (
@@ -44,60 +52,78 @@ export function Courses() {
         </div>
       )}
 
-      {data && (
-        <div className="items-center flex justify border p-2 m-2 rounded bg-[var(--color-surface)]">
-        <Tabs
-          defaultActiveKey="Tecnologia"
-          tabPosition="left"
-          className="flex justify- flex-wrap items-center w-full  mx-auto mt-10 text-left"
-          items={data.areas?.map((area: area) => ({
-            key: area.name,
-            // usando suas classes de cor e fonte
-            label: (
-              <span className="text-xl text-left text-[var(--color-text)]">
-                {area.name}
-              </span>
-            ),
-            children: (
-              <div>
-                <hr/>
-                <p className="text-white">Selecione uma instituição de ensino para ver os cursos disponíveis</p>
-                {area.ies?.map((ies: ies) => (
-                  <Accordion className="w-auto" key={ies.name} type="single" collapsible>
-                    <AccordionItem value={ies.name}>
-                      
-                      <AccordionTrigger className="text-xl text-[var(--color-text-secondary)]">
-                        {ies.name}
-                      </AccordionTrigger>
-                      <div className="flex gap-2 flex-wrap items-center justify-center">
-                        {ies.courses?.map((course: courses) => (
-                          <AccordionContent key={course.id}>
-                            <div className="p-4 border rounded px-2">
-                              <h3 className="text-center text-[var(--color-text)]">{course.name}</h3>
-                              <span className="items-center flex justify-center">
-                                <Badge variant="default" className="text-center bg-[var(--color-surface)]">
-                                Duração de {course.duration}
-                              </Badge>
-                              </span>
-                              
-                              <a
-                                target="_blank"
-                                href={course.link.toString()}
-                                className="flex items-center gap-2 mt-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 rounded"
-                              >
-                                <ExternalLink /> Acessar
-                              </a>
-                            </div>
-                          </AccordionContent>
-                        ))}
+      {data?.areas && (
+        <div className="flex border p-4 m-6 rounded bg-[var(--color-surface)]">
+         <Tabs
+  defaultActiveKey="Tecnologia"
+  // tab lateral em desktop, em cima no mobile
+  tabPosition="top"
+  className="w-full mt-6"
+  items={data.areas.map((area: Area) => ({
+    key: area.name,
+    label: (
+      <span className="text-lg font-semibold text-[var(--color-text)] hover:text-[var(--color-primary)] transition-colors">
+        {area.name}
+      </span>
+    ),
+    children: (
+      <div className="space-y-6">
+        <hr className="border-[var(--color-border)]" />
+        <p className="text-[var(--color-text-secondary)] text-sm">
+          Selecione uma instituição de ensino para ver os cursos disponíveis:
+        </p>
+
+        {area.ies.map((institution: Institution) => (
+          <Accordion
+            key={institution.name}
+            type="single"
+            collapsible
+            className="w-full"
+          >
+            <AccordionItem value={institution.name}>
+              <AccordionTrigger className="text-lg text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors">
+                {institution.name}
+              </AccordionTrigger>
+
+              <AccordionContent>
+                <div className="flex flex-col gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">
+                  {institution.courses.map((course: Course) => (
+                    <div
+                      key={course.id}
+                      className="p-6 border rounded-2xl shadow-md hover:shadow-lg bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-background-alt)] transition"
+                    >
+                      <h3 className="text-lg font-bold text-[var(--color-text)] text-center">
+                        {course.name}
+                      </h3>
+
+                      <div className="flex justify-center mt-3">
+                        <Badge className="flex items-center gap-1 rounded-full px-3 py-1 bg-[var(--color-primary-dark)]/20 text-[var(--color-primary)]">
+                          <ClockIcon size={14} />
+                          {course.duration}
+                        </Badge>
                       </div>
-                    </AccordionItem>
-                  </Accordion>
-                ))}
-              </div>
-            ),
-          }))}
-        />
+
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={course.link}
+                        id="linkcurso"
+                        className="flex items-center justify-center gap-2 mt-5 font-medium"
+                      >
+                        <ExternalLink size={18} /> Acessar
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        ))}
+      </div>
+    ),
+  }))}
+
+          />
         </div>
       )}
     </Maintemplate>

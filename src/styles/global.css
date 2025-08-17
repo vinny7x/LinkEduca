@@ -122,3 +122,32 @@ body {
     @apply bg-background text-foreground;
   }
 }
+/* Tab ativa */
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--color-primary) !important;
+  font-weight: 600;
+}
+
+/* Linha underline da Tab */
+.ant-tabs-ink-bar {
+  background: var(--color-primary) !important;
+}
+
+/* Focus azul chato */
+.ant-tabs-tab:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--color-primary-light) !important;
+}
+#linkcurso {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-primary-light);
+}
+
+a:active {
+  color: var(--color-primary-dark);
+}
