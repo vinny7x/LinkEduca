@@ -16,6 +16,7 @@ import { Tabs } from "antd";
 type Course = {
   id: string;
   name: string;
+  desc: string;
   link: string;
   duration: string;
   dificuldade: string;
@@ -95,6 +96,7 @@ export function Courses() {
                       <h3 className="text-lg font-bold text-[var(--color-text)] text-center">
                         {course.name}
                       </h3>
+                      <p className="text-[var(--color-text)]">{course.desc || ""}</p>
 
                       <div className="flex justify-center mt-3">
                         <Badge className="flex items-center gap-1 rounded-full px-3 py-1 bg-[var(--color-primary-dark)]/20 text-[var(--color-primary)]">
