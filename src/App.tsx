@@ -5,6 +5,7 @@ import "./styles/theme.css";
 import { Home } from "./Pages/Home/Home";
 import { Courses } from "./Pages/Courses/Courses";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Jobs } from "./Pages/Jobs";
 const queryClient = new QueryClient()
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cursos" element={<Courses />} />
+          <Route path="/vagas" element={<Jobs/>}/>
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
