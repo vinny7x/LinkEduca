@@ -104,16 +104,18 @@ export function Courses() {
                           {course.duration}
                         </Badge>
                       </div>
+                <span className="flex justify-center items-center m-auto gap-2">
 
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
                         href={course.link}
                         id="linkcurso"
-                        className="flex items-center justify-center gap-2 mt-5 font-medium"
+                        className="justify-center flex items-center gap-2 mt-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 border rounded"
                       >
                         <ExternalLink size={18} /> Acessar
                       </a>
+                      </span>
                     </div>
                   ))}
                 </div>

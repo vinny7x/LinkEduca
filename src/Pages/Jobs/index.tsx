@@ -1,7 +1,7 @@
 import { Title } from "@/Components/Title/Title";
 import { Maintemplate } from "@/Templates/Maintemplate";
 import { useQuery } from "@tanstack/react-query";
-import { ClockIcon, ExternalLinkIcon } from "lucide-react";
+import {  BriefcaseBusinessIcon, Building2Icon, ClockIcon, NewspaperIcon } from "lucide-react";
 import { PuffLoader } from "react-spinners";
 import moment from "moment";
 import { Badge } from "@/Components/ui/badge";
@@ -45,7 +45,7 @@ export function Jobs() {
         </div>
       )}
       {error && <p>ocorreu um erro</p>}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ml-[10%] mr-[10%] mt-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 ml-[10%] mr-[10%] mt-2">
         {data &&
           data.data.map((job: jobType) => {
             return (
@@ -74,7 +74,7 @@ export function Jobs() {
                   </Badge>
                 </span>
 
-                <div className="flex m-2 gap-2 justify-center">
+                <div className="flex m-2 gap-2 justify-center flex-wrap">
                   {job.jobTags.map((tag) => {
                     return (
                       <Badge
@@ -92,29 +92,29 @@ export function Jobs() {
                   src={`https://api.remotar.com.br/jobs/${job.id}/thumbnail`}
                   alt=""
                 />
-                <div className="flex justify-center items-center m-auto gap-2">
+                <span className="flex justify-center items-center m-auto gap-2">
                   <a
                     className="justify-center flex items-center gap-2 mt-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 border rounded"
                     href={job.externalLink}
                     target="_blank"
                   >
-                    <ExternalLinkIcon /> Acessar Vaga
+                    <BriefcaseBusinessIcon/> Vaga
                   </a>
                   <a
                     className="justify-center flex items-center gap-2 mt-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 border rounded"
                     href={`https://remotar.com.br/job/${job.id}`}
                     target="_blank"
                   >
-                    <ExternalLinkIcon /> Acessar Postagem
+                    <NewspaperIcon /> Postagem
                   </a>
                   <a
                     className="justify-center flex items-center gap-2 mt-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 border rounded"
                     href={job.company.link}
                     target="_blank"
                   >
-                    <ExternalLinkIcon /> Acessar Contratante
+                    <Building2Icon /> Contratante
                   </a>
-                </div>
+                </span>
               </div>
             );
           })}
