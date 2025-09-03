@@ -1,11 +1,18 @@
 import { Title } from "@/Components/Title/Title";
 import { Maintemplate } from "@/Templates/Maintemplate";
 import { useQuery } from "@tanstack/react-query";
-import {  BriefcaseBusinessIcon, Building2Icon, ClockIcon, NewspaperIcon } from "lucide-react";
+import {
+  BriefcaseBusinessIcon,
+  Building2Icon,
+  ClockIcon,
+  ExternalLink,
+  NewspaperIcon,
+} from "lucide-react";
 import { PuffLoader } from "react-spinners";
 import moment from "moment";
 import { Badge } from "@/Components/ui/badge";
 type jobType = {
+  createdAt: Date;
   company: company;
   updatedt: Date;
   subtitle: string;
@@ -65,12 +72,7 @@ export function Jobs() {
                     variant="secondary"
                   >
                     <ClockIcon />
-                    {(() => {
-                      const date = moment(job.updatedt);
-                      return `Atualizado em ${date.format(
-                        "DD/MM/YYYY [às] HH:MM"
-                      )}`;
-                    })()}
+                    {`Atualizado em ${formatTime(job.createdAt)}`}
                   </Badge>
                 </span>
 
@@ -92,33 +94,38 @@ export function Jobs() {
                   src={`https://api.remotar.com.br/jobs/${job.id}/thumbnail`}
                   alt=""
                 />
-                <span className="flex justify-center items-center m-auto gap-2">
+                <div className="grid md:grid-cols-3 grid-cols-2 justify-center items-center m-auto gap-2">
                   <a
                     className="justify-center flex items-center gap-2 mt-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 border rounded"
                     href={job.externalLink}
                     target="_blank"
                   >
-                    <BriefcaseBusinessIcon/> Vaga
+                    <BriefcaseBusinessIcon /> Vaga <ExternalLink size="16" />
                   </a>
                   <a
                     className="justify-center flex items-center gap-2 mt-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 border rounded"
                     href={`https://remotar.com.br/job/${job.id}`}
                     target="_blank"
                   >
-                    <NewspaperIcon /> Postagem
+                    <NewspaperIcon /> Postagem <ExternalLink size="16" />
                   </a>
                   <a
                     className="justify-center flex items-center gap-2 mt-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 border rounded"
                     href={job.company.link}
                     target="_blank"
                   >
-                    <Building2Icon /> Contratante
+                    <Building2Icon /> Contratante <ExternalLink size="16" />
                   </a>
-                </span>
+                </div>
               </div>
             );
           })}
       </div>
     </Maintemplate>
   );
+}
+
+function formatTime(time: Date) {
+  const date = moment(time);
+  return date.format("DD/MM/YYYY [às] HH:MM");
 }
