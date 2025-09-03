@@ -72,7 +72,7 @@ export function Jobs() {
                     variant="secondary"
                   >
                     <ClockIcon />
-                    {`Atualizado em ${formatTime(job.createdAt)}`}
+                    {`Postado em ${formatTime(job.createdAt)}`}
                   </Badge>
                 </span>
 
