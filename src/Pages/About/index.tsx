@@ -1,6 +1,6 @@
 import { Title } from "@/Components/Title/Title";
 import { Maintemplate } from "@/Templates/Maintemplate";
-import { ExternalLink} from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export function About() {
@@ -28,62 +28,58 @@ export function About() {
         </p>
         <br />
 
-
         <Title>Sobre o desenvolvedor</Title>
-<div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-  {/* Imagem + botões */}
-  <div className="flex flex-col items-center md:items-start gap-4">
-    <img
-      className="w-32 sm:w-40 md:w-48 lg:w-64 rounded border-[var(--color-primary)] border-2 transform transition-transform duration-300 hover:scale-105 shadow-green-100 shadow-2xl "
-      src="/images/vinicios.jpeg"
-      alt="Foto de Vinícios"
-    />
-    <div className="flex flex-row gap-2">
-      <a href="https://github.com/vinny7x" target="_blank">
-        <button className="flex items-center gap-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 border rounded cursor-pointer">
-          <FaGithub /> GitHub <ExternalLink size="16" />
-        </button>
-      </a>
-      <a href="https://www.linkedin.com/in/vinicios-mendes/" target="_blank">
-        <button className="flex items-center gap-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 border rounded cursor-pointer">
-        <FaLinkedin/>  LinkedIn <ExternalLink size="16" />
-        </button>
-      </a>
-    </div>
-  </div>
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+          {/* Imagem + botões */}
+          <div className="flex flex-col items-center md:items-start gap-4">
+            <img
+              className="w-32 sm:w-40 md:w-48 lg:w-64 rounded border-[var(--color-primary)] border-2 transform transition-transform duration-300 hover:scale-105 shadow-green-100 shadow-2xl "
+              src="/images/vinicios.jpeg"
+              alt="Foto de Vinícios"
+            />
+            <div className="flex flex-row gap-2">
+              <a href="https://github.com/vinny7x" target="_blank">
+                <button className="flex items-center gap-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 border rounded cursor-pointer">
+                  <FaGithub /> GitHub <ExternalLink size="16" />
+                </button>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/vinicios-mendes/"
+                target="_blank"
+              >
+                <button className="flex items-center gap-2 text-[var(--color-primary)] hover:text-[var(--color-primary-light)] p-2 border rounded cursor-pointer">
+                  <FaLinkedin /> LinkedIn <ExternalLink size="16" />
+                </button>
+              </a>
+            </div>
+          </div>
 
-  {/* Texto */}
-  <div className="flex-1">
-    <p className="mb-2">
-      <b>Vinícios Mendes</b> é um estudante de Sistemas de informação, na{" "}
-      <a
-        className="underline inline-flex gap-1"
-        href="https://graduacao.grancursosonline.com.br"
-        target="_blank"
-      >
-        Gran cento universitário
-        <ExternalLink size="16" />
-      </a>
-      , sendo esse um projeto pensado para a atividade extencionista II.
-    </p>
-    <p>
-      Vinícios é interessado em tudo que envolve tecnologia, desde
-      desenvolvimento de software até novas ferramentas e tendências do setor.
-      Ele gosta de explorar diferentes áreas, testar novas ideias e aprender
-      na prática, sempre procurando entender como as coisas funcionam por trás
-      da tela. Projetos pessoais, experiências com programação e descobertas
-      tecnológicas fazem parte do seu dia a dia.
-    </p>
-  </div>
-</div>
-<br />
-<p> Vinícios é interessado em tudo que envolve tecnologia, desde
-    desenvolvimento de software até novas ferramentas e tendências do
-    setor. Ele gosta de explorar diferentes áreas, testar novas ideias e
-    aprender na prática, sempre procurando entender como as coisas
-    funcionam por trás da tela. Projetos pessoais, experiências com
-    programação e descobertas tecnológicas fazem parte do seu dia a dia.</p>
-
+          {/* Texto */}
+          <div className="flex-1">
+            <p className="mb-2">
+              <b>Vinícios Mendes</b> é um estudante de Sistemas de informação,
+              na{" "}
+              <a
+                className="underline inline-flex gap-1"
+                href="https://graduacao.grancursosonline.com.br"
+                target="_blank"
+              >
+                Gran cento universitário
+                <ExternalLink size="16" />
+              </a>
+              , sendo esse um projeto pensado para a atividade extencionista II.
+            </p>
+            <p>
+              Vinícios é interessado em tudo que envolve tecnologia, desde
+              desenvolvimento de software até novas ferramentas e tendências do
+              setor. Ele gosta de explorar diferentes áreas, testar novas ideias
+              e aprender na prática, sempre procurando entender como as coisas
+              funcionam por trás da tela. Projetos pessoais, experiências com
+              programação e descobertas tecnológicas fazem parte do seu dia a
+              dia.
+            </p>
+          </div>
+        </div>
       </section>
     </Maintemplate>
   );
