@@ -5,8 +5,8 @@ export function Navbar() {
   return (
     <nav className="bg-[var(--color-surface)] p-2 flex gap-2 items-center justify-between">
       <Link to='/'><img
-        className="items-start"
-        src="https://placehold.co/32"
+        className="items-start w-16"
+        src="/favicon/web-app-manifest-512x512.png"
         alt="Link Educa logo"
       />
       </Link>
